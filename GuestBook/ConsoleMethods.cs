@@ -57,6 +57,32 @@ namespace GuestBook
             return number;
         }
 
+        public static (List<string> guests, int totalGuests) GetGuests()
+        {
+            List<string> guestList = new List<string>();
+            int totalGuests = 0;
+            bool isDone = false;
+
+            do
+            {
+                string name = ConsoleMethods.GetGuestName();
+                guestList.Add(name);
+
+                int number = ConsoleMethods.GetGuestCount();
+                totalGuests += number;
+
+                Console.Write("\nAre there more guests to add to the guestbook? (type yes or no) ");
+                string hasMore = Console.ReadLine();
+
+                if (hasMore.ToLower() == "no")
+                {
+                    isDone = true;
+                }
+            } while (!isDone);
+
+            return (guestList, totalGuests);
+        }
+
         public static void PrintGuestList(List<string> list)
         {
             foreach (string name in list)

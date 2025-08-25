@@ -25,28 +25,9 @@
 
 using GuestBook;
 
-List<string> guestList = new List<string>();
-int totalGuests = 0;
-bool isDone = false;
-
 ConsoleMethods.WelcomeUser();
 
-do
-{
-    string name = ConsoleMethods.GetGuestName();
-    guestList.Add(name);
-
-    int number = ConsoleMethods.GetGuestCount();
-    totalGuests += number;
-
-    Console.Write("\nAre there more guests to add to the guestbook? (type yes or no) ");
-    string hasMore = Console.ReadLine();
-
-    if (hasMore.ToLower() == "no")
-    {
-        isDone = true;
-    }
-} while (!isDone);
+(List<string> guestList, int totalGuests) = ConsoleMethods.GetGuests();
 
 Console.WriteLine();
 ConsoleMethods.PrintGuestList(guestList);
