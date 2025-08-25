@@ -57,11 +57,25 @@ namespace GuestBook
             return number;
         }
 
+        public static bool AskToContinue()
+        {
+            bool isDone = false;
+
+            Console.Write("\nAre there more guests to add to the guestbook? (type yes or no) ");
+            string hasMore = Console.ReadLine();
+
+            if (hasMore.ToLower() == "yes")
+            {
+                isDone = true;
+            }
+
+            return isDone;
+        }
+
         public static (List<string> guests, int totalGuests) GetGuests()
         {
             List<string> guestList = new List<string>();
             int totalGuests = 0;
-            bool isDone = false;
 
             do
             {
@@ -71,24 +85,22 @@ namespace GuestBook
                 int number = ConsoleMethods.GetGuestCount();
                 totalGuests += number;
 
-                Console.Write("\nAre there more guests to add to the guestbook? (type yes or no) ");
-                string hasMore = Console.ReadLine();
-
-                if (hasMore.ToLower() == "no")
-                {
-                    isDone = true;
-                }
-            } while (!isDone);
+                
+            } while (AskToContinue());
 
             return (guestList, totalGuests);
         }
 
-        public static void PrintGuestList(List<string> list)
+        public static void PrintGuestList(List<string> list, int totalGuests)
         {
+            Console.WriteLine();
+
             foreach (string name in list)
             {
                 Console.WriteLine(name);
             }
+
+            Console.WriteLine($"\nThe total number of guests is {totalGuests}.");
         }
     }
 }

@@ -29,6 +29,4 @@ ConsoleMethods.WelcomeUser();
 
 (List<string> guestList, int totalGuests) = ConsoleMethods.GetGuests();
 
-Console.WriteLine();
-ConsoleMethods.PrintGuestList(guestList);
-Console.WriteLine($"\nThe total number of guests is {totalGuests}.");
+ConsoleMethods.PrintGuestList(guestList, totalGuests);
