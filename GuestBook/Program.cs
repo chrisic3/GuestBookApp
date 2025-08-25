@@ -11,8 +11,10 @@
  *  
  *  do
  *      ask for name: {GetGuestName}
+ *      add name to {guestList}
  *      
  *      ask for number in party: {GetNumberInParty}
+ *      add number to {totalGuests}
  *      
  *      ask if done: {isDone}
  *  while not {isDone}
@@ -21,3 +23,31 @@
  *  "There are {totalGuests} total guests."
  */
 
+using GuestBook;
+
+List<string> guestList = new List<string>();
+int totalGuests = 0;
+bool isDone = false;
+
+ConsoleMethods.WelcomeUser();
+
+do
+{
+    string name = ConsoleMethods.GetGuestName();
+    guestList.Add(name);
+
+    int number = ConsoleMethods.GetGuestCount();
+    totalGuests += number;
+
+    Console.Write("\nAre there more guests to add to the guestbook? (type yes or no) ");
+    string hasMore = Console.ReadLine();
+
+    if (hasMore.ToLower() == "no")
+    {
+        isDone = true;
+    }
+} while (!isDone);
+
+Console.WriteLine();
+ConsoleMethods.PrintGuestList(guestList);
+Console.WriteLine($"\nThe total number of guests is {totalGuests}.");
